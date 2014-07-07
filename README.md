@@ -1,4 +1,4 @@
-# [slush](https://github.com/slushjs/slush)-foundation [![Build Status](https://secure.travis-ci.org/jonkemp/slush-ember.png?branch=master)](https://travis-ci.org/jonkemp/slush-ember)
+# [slush](https://github.com/slushjs/slush)-ember [![Build Status](https://secure.travis-ci.org/jonkemp/slush-ember.png?branch=master)](https://travis-ci.org/jonkemp/slush-ember)
 
 > Slush generator for Ember.js
 
