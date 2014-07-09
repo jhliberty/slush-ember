@@ -49,20 +49,18 @@ describe('slush-ember', function() {
         it('should create expected files', function (done) {
             gulp.start('default').once('stop', function () {
                 mockGulpDest.assertDestContains([
+                    '.bowerrc',
                     '.editorconfig',
                     '.gitattributes',
                     '.gitignore',
                     '.jshintrc',
+                    'bower.json',
                     'package.json',
                     'gulpfile.js',
                     'README.md',
                     'app/index.html',
-                    'app/css/normalize.css',
                     'app/css/style.css',
                     'app/js/app.js',
-                    'app/js/libs/ember-1.5.1.js',
-                    'app/js/libs/handlebars-1.1.2.js',
-                    'app/js/libs/jquery-1.10.2.js',
                     'tests/runner.css',
                     'tests/runner.js',
                     'tests/tests.js',
