@@ -55,7 +55,7 @@ describe('slush-ember', function() {
                     '.jshintrc',
                     'package.json',
                     'gulpfile.js',
-                    'app/README.md',
+                    'README.md',
                     'app/index.html',
                     'app/css/normalize.css',
                     'app/css/style.css',
@@ -63,11 +63,11 @@ describe('slush-ember', function() {
                     'app/js/libs/ember-1.5.1.js',
                     'app/js/libs/handlebars-1.1.2.js',
                     'app/js/libs/jquery-1.10.2.js',
-                    'app/tests/runner.css',
-                    'app/tests/runner.js',
-                    'app/tests/tests.js',
-                    'app/tests/vendor/qunit-1.12.0.css',
-                    'app/tests/vendor/qunit-1.12.0.js'
+                    'tests/runner.css',
+                    'tests/runner.js',
+                    'tests/tests.js',
+                    'tests/vendor/qunit-1.12.0.css',
+                    'tests/vendor/qunit-1.12.0.js'
                 ]);
 
                 done();
