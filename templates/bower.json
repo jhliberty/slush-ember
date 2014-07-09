@@ -1,0 +1,8 @@
+{
+  "name": "<%= appNameSlug %>",
+  "private": true,
+  "dependencies": {
+    "normalize-css": "~3.0.1",
+    "ember": "~1.6.0"
+  }
+}
