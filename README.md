@@ -26,6 +26,11 @@ $ cd my-slush-ember && slush ember
 
 You can use Gulp to preview your app by running `gulp serve`. This task will also reload watched files instantly with livereload. To see what else you can do with Gulp, check out the [gulpfile.js](https://github.com/jonkemp/slush-ember/blob/master/templates/gulpfile.js).
 
+## Options
+
+- `--skip-install`
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
+
 ## Getting To Know Slush
 
 Slush is a tool that uses Gulp for project scaffolding. To find out more about Slush, check out the [documentation](https://github.com/slushjs/slush).
