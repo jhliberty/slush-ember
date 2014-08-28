@@ -1,5 +1,10 @@
 # slush-ember changelog
 
+# 1.0.0
+
+- New gulpfile.js.
+- Update dependencies.
+
 # 0.2.0
 
 - Dependencies are now installed using Bower.
