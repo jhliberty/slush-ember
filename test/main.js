@@ -29,6 +29,7 @@ function mockPrompt(answers) {
 describe('slush-ember', function() {
     before(function () {
         process.chdir(__dirname);
+        process.argv.push('--skip-install');
     });
 
     describe('default generator', function () {
@@ -61,11 +62,9 @@ describe('slush-ember', function() {
                     'app/index.html',
                     'app/css/style.css',
                     'app/js/app.js',
+                    'tests/index.html',
                     'tests/runner.css',
-                    'tests/runner.js',
-                    'tests/tests.js',
-                    'tests/vendor/qunit-1.12.0.css',
-                    'tests/vendor/qunit-1.12.0.js'
+                    'tests/tests.js'
                 ]);
 
                 done();
