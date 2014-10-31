@@ -1,7 +1,7 @@
 {
   "name": "slush-ember",
   "description": "Slush generator for Ember.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/jonkemp/slush-ember",
   "author": {
     "name": "Jonathan Kemp",
