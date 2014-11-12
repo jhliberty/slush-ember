@@ -16,7 +16,9 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     _s = require('underscore.string'),
     inquirer = require('inquirer'),
-    path = require('path');
+    path = require('path'),
+    gulpif = require('gulp-if'),
+    replace = require('gulp-replace');
 
 gulp.task('default', function (done) {
 
@@ -53,6 +55,7 @@ gulp.task('default', function (done) {
 
         gulp.src(__dirname + '/templates/**')
             .pipe(template(answers))
+            .pipe(gulpif('**/gulpfile.js', replace('@@contents', '<%= contents %>')))
             .pipe(rename(function (file) {
                 if (file.basename[0] === '_') {
                     file.basename = '.' + file.basename.slice(1);
@@ -64,5 +67,26 @@ gulp.task('default', function (done) {
             .on('finish', function () {
                 done();
             });
+
+        process.on('exit', function () {
+            var fs = require('fs'),
+                wiredep = require('wiredep'),
+                skipInstall = process.argv.slice(2).indexOf('--skip-install') >= 0;
+
+            if (!skipInstall) {
+                var bowerJson = JSON.parse(fs.readFileSync('./bower.json'));
+
+                // wire Bower packages to .html
+                wiredep({
+                    bowerJson: bowerJson,
+                    directory: 'bower_components',
+                    src: 'app/index.html'
+                });
+            } else {
+                gutil.log('After running `npm install & bower install`, inject your front end dependencies into');
+                gutil.log('your HTML by running:');
+                gutil.log('  gulp wiredep');
+            }
+        });
     });
 });
