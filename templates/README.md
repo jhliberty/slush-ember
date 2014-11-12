@@ -14,14 +14,14 @@ Your Ember.js project is almost ready! Here's how to get started:
 
 - Add CSS to `css/style.css`.
 
-- Open `index.html` in your browser.
+- Open `index.html` in your browser, or run `gulp serve` from your command line.
 
 Tests
 =====
 
 This starter kit comes with an integration test sample, written for QUnit runner. 
 
-You can run the tests by opening the `index.html?test` page in your browser.
+You can run the tests by opening the `tests/index.html` page in your browser, or running `gulp test` from your command line.
 
 The test is located in the `tests/tests.js` file. You can see how such an 
 integration test should be written, using QUnit assertions and ember-testing helpers.

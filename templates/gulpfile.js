@@ -1,10 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp'),
+  del = require('del');
 
-gulp.task('clean', function (cb) {
-  require('rimraf')('dist', cb);
-});
+gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('lint', function () {
   var jshint = require('gulp-jshint');
@@ -14,7 +13,7 @@ gulp.task('lint', function () {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
   var qunit = require('node-qunit-phantomjs');
 
   qunit('./tests/index.html');
@@ -25,7 +24,26 @@ gulp.task('images', function () {
     .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('html', function () {
+gulp.task('templates', function () {
+  var wrap = require('gulp-wrap'),
+    concat = require('gulp-concat'),
+    declare = require('gulp-declare'),
+    handlebars = require('gulp-handlebars');
+
+  return gulp.src('app/templates/**/*.hbs')
+    .pipe(handlebars({
+      handlebars: require('ember-handlebars')
+    }))
+    .pipe(wrap('Ember.Handlebars.template(@@contents)'))
+    .pipe(declare({
+      namespace: 'Ember.TEMPLATES',
+      noRedeclare: true
+    }))
+    .pipe(concat('compiled-templates.js'))
+    .pipe(gulp.dest('.tmp/js'));
+});
+
+gulp.task('html', ['templates'], function () {
   var uglify = require('gulp-uglify'),
     minifyCss = require('gulp-minify-css'),
     useref = require('gulp-useref'),
@@ -41,13 +59,23 @@ gulp.task('html', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('connect', function () {
+// inject bower components
+gulp.task('wiredep', function () {
+  var wiredep = require('wiredep').stream;
+
+  gulp.src('app/*.html')
+    .pipe(wiredep())
+    .pipe(gulp.dest('app'));
+});
+
+gulp.task('connect', ['templates'], function () {
   var connect = require('connect');
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = connect()
     .use(require('connect-livereload')({ port: 35729 }))
     .use(serveStatic('app'))
+    .use(serveStatic('.tmp'))
     // paths to bower_components should be relative to the current file
     // e.g. in app/index.html you should use ../bower_components
     .use('/bower_components', serveStatic('bower_components'))
@@ -71,9 +99,13 @@ gulp.task('serve', ['connect'], function () {
   gulp.watch([
     'app/*.html',
     'app/css/**/*.css',
+    '.tmp/js/**/*.js',
     'app/js/**/*.js',
     'app/images/**/*'
   ]).on('change', livereload.changed);
+
+  gulp.watch('app/templates/**/*.hbs', ['templates']);
+  gulp.watch('bower.json', ['wiredep']);
 });
 
 gulp.task('build', ['lint', 'test', 'html', 'images']);
