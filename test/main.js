@@ -62,6 +62,8 @@ describe('slush-ember', function() {
                     'app/index.html',
                     'app/css/style.css',
                     'app/js/app.js',
+                    'app/templates/application.hbs',
+                    'app/templates/index.hbs',
                     'tests/index.html',
                     'tests/runner.css',
                     'tests/tests.js'
