@@ -25,20 +25,11 @@ gulp.task('images', function () {
 });
 
 gulp.task('templates', function () {
-  var wrap = require('gulp-wrap'),
-    concat = require('gulp-concat'),
-    declare = require('gulp-declare'),
-    handlebars = require('gulp-handlebars');
+  var concat = require('gulp-concat'),
+    templateCompiler = require('gulp-ember-template-compiler');
 
   return gulp.src('app/templates/**/*.hbs')
-    .pipe(handlebars({
-      handlebars: require('ember-handlebars')
-    }))
-    .pipe(wrap('Ember.Handlebars.template(@@contents)'))
-    .pipe(declare({
-      namespace: 'Ember.TEMPLATES',
-      noRedeclare: true
-    }))
+    .pipe(templateCompiler())
     .pipe(concat('compiled-templates.js'))
     .pipe(gulp.dest('.tmp/js'));
 });
