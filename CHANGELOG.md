@@ -1,5 +1,11 @@
 # slush-ember changelog
 
+# 1.2.0
+
+- Update ember to 1.9.
+- Override Handlebars to use the runtime version in Bower.
+- Update templates gulp task.
+
 # 1.1.0
 
 - Move bower_components to the root.
